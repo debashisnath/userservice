@@ -15,5 +15,9 @@ import com.dcs.userregistration.model.User;
 @Repository
 public interface UserRepository extends CrudRepository<User, String> {
 
+	/**
+	 * @param emailId
+	 * @return
+	 */
 	User findByEmailId(String emailId);
 }

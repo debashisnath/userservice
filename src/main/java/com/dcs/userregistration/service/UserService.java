@@ -7,10 +7,15 @@ import java.util.Map;
 
 import javax.mail.MessagingException;
 
+import com.dcs.userregistration.exception.OtpNotFoundException;
+import com.dcs.userregistration.exception.OtpNotMatchedException;
 import com.dcs.userregistration.exception.ProfileAlreadyExistsException;
 import com.dcs.userregistration.exception.UserDoesNotExistException;
 import com.dcs.userregistration.exception.UserIdAndPasswordMismatchException;
+import com.dcs.userregistration.exception.UserNullException;
 import com.dcs.userregistration.exception.UserProfileDoesNotApprovedException;
+import com.dcs.userregistration.exception.WrongEmailIdException;
+import com.dcs.userregistration.model.LogInCredentials;
 import com.dcs.userregistration.model.RetrievedUser;
 import com.dcs.userregistration.model.User;
 
@@ -20,13 +25,46 @@ import com.dcs.userregistration.model.User;
  */
 public interface UserService {
 
-	public String saveUser(User user) throws ProfileAlreadyExistsException;
+	/**
+	 * @param user
+	 * @return
+	 * @throws ProfileAlreadyExistsException
+	 * @throws WrongEmailIdException 
+	 */
+	public String saveUser(User user) throws ProfileAlreadyExistsException, WrongEmailIdException;
 	
-	public RetrievedUser getUserProfile(String emailId) throws UserDoesNotExistException;
+	/**
+	 * @param emailId
+	 * @return
+	 * @throws UserDoesNotExistException
+	 * @throws UserNullException
+	 */
+	public RetrievedUser getUserProfile(String emailId) throws UserDoesNotExistException, UserNullException;
 	
-	public Map<String, String> findByEmailIdAndPassword(String emailId, String password) throws UserDoesNotExistException, UserIdAndPasswordMismatchException, UserProfileDoesNotApprovedException;
+	/**
+	 * @param logInCredentials
+	 * @return
+	 * @throws UserDoesNotExistException
+	 * @throws UserIdAndPasswordMismatchException
+	 * @throws UserProfileDoesNotApprovedException
+	 */
+	public Map<String, String> authenticateUser(LogInCredentials logInCredentials) throws UserDoesNotExistException, UserIdAndPasswordMismatchException, UserProfileDoesNotApprovedException;
 	
-	public void forgetPassword(String emailId) throws MessagingException, UserDoesNotExistException;
+	/**
+	 * @param emailId
+	 * @throws MessagingException
+	 * @throws UserDoesNotExistException
+	 * @throws UserNullException 
+	 */
+	public void forgetPassword(String emailId) throws MessagingException, UserDoesNotExistException, UserProfileDoesNotApprovedException, UserNullException;
 	
-	public String updateProfileStatus(String emailId, int otp) throws UserDoesNotExistException;
+	/**
+	 * @param emailId
+	 * @param otp
+	 * @return
+	 * @throws UserDoesNotExistException
+	 * @throws OtpNotFoundException 
+	 * @throws OtpNotMatchedException 
+	 */
+	public String updateProfileStatus(String emailId, int otp) throws UserDoesNotExistException, OtpNotFoundException, OtpNotMatchedException;
 }

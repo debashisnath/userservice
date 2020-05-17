@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.springframework.stereotype.Service;
 
+import com.dcs.userregistration.exception.OtpNotFoundException;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
@@ -30,6 +31,9 @@ public class OtpServiceImpl implements OtpService {
 				       }
 				   });
 	 }
+	/* (non-Javadoc)
+	 * @see com.dcs.userregistration.service.OtpService#generateOTP(java.lang.String)
+	 */
 	@Override
 	public int generateOTP(String key) throws Exception {
 		Random random = new Random();
@@ -38,8 +42,11 @@ public class OtpServiceImpl implements OtpService {
 		return otp;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.dcs.userregistration.service.OtpService#getOTP(java.lang.String)
+	 */
 	@Override
-	public int getOTP(String key) throws Exception {
+	public int getOTP(String key) throws OtpNotFoundException {
 		try {
 			return otpCache.get(key);
 		}catch (Exception e) {
@@ -48,8 +55,11 @@ public class OtpServiceImpl implements OtpService {
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see com.dcs.userregistration.service.OtpService#clearOTP(java.lang.String)
+	 */
 	@Override
-	public void clearOTP(String key) throws Exception {
+	public void clearOTP(String key) throws OtpNotFoundException{
 		otpCache.invalidate(key);
 
 	}

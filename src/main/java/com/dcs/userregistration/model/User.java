@@ -15,6 +15,10 @@ import javax.persistence.TemporalType;
 
 import com.dcs.userregistration.util.ProfileStatus;
 
+/**
+ * @author DebashisNath
+ *
+ */
 @Entity
 @Table(name = "User")
 public class User {
@@ -45,6 +49,24 @@ public class User {
 	@Column
 	@Enumerated(EnumType.STRING)
 	private ProfileStatus profileStatus;
+	
+	@Column
+	private String paymentStatus;
+	
+
+	/**
+	 * @return the paymentStatus
+	 */
+	public String getPaymentStatus() {
+		return paymentStatus;
+	}
+
+	/**
+	 * @param paymentStatus the paymentStatus to set
+	 */
+	public void setPaymentStatus(String paymentStatus) {
+		this.paymentStatus = paymentStatus;
+	}
 
 	/**
 	 * @return the id

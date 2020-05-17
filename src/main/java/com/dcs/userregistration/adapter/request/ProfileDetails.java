@@ -1,16 +1,21 @@
 /**
  * 
  */
-package com.dcs.userregistration.model;
+package com.dcs.userregistration.adapter.request;
 
+import java.io.Serializable;
 import java.util.Date;
 
-
 /**
- * @author Debashis
+ * @author DebashisNath
  *
  */
-public class RetrievedUser {
+public class ProfileDetails implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 9136268728921896694L;
 	private int id;
 	private String firstName;
 	private String lastName;
@@ -19,19 +24,6 @@ public class RetrievedUser {
 	private String emailId;
 	private String profileStatus;
 	private String paymentStatus;
-	
-	/**
-	 * @return the paymentStatus
-	 */
-	public String getPaymentStatus() {
-		return paymentStatus;
-	}
-	/**
-	 * @param paymentStatus the paymentStatus to set
-	 */
-	public void setPaymentStatus(String paymentStatus) {
-		this.paymentStatus = paymentStatus;
-	}
 	/**
 	 * @return the id
 	 */
@@ -115,6 +107,18 @@ public class RetrievedUser {
 	 */
 	public void setProfileStatus(String profileStatus) {
 		this.profileStatus = profileStatus;
+	}
+	/**
+	 * @return the paymentStatus
+	 */
+	public String getPaymentStatus() {
+		return paymentStatus;
+	}
+	/**
+	 * @param paymentStatus the paymentStatus to set
+	 */
+	public void setPaymentStatus(String paymentStatus) {
+		this.paymentStatus = paymentStatus;
 	}
 	
 	
